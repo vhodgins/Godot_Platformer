@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Levels.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/main_cam.gd" type="Script" id=2]
+[ext_resource path="res://player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Rooms/0000_enemy_room.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Rooms/0001_outside_tower.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Objects/healthbar.tscn" type="PackedScene" id=6]
+
+[node name="Node2D" type="Node2D"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 408, 584 )
+collision/safe_margin = 0.001
+
+[node name="MainCam" type="Camera2D" parent="player"]
+visible = false
+current = true
+limit_left = -64
+limit_top = -64
+limit_right = 1984
+limit_bottom = 1080
+limit_smoothed = true
+smoothing_enabled = true
+editor_draw_screen = false
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PlayerCanvas" type="CanvasLayer" parent="player"]
+
+[node name="Healthbar" parent="player/PlayerCanvas" instance=ExtResource( 6 )]
+position = Vector2( 160, 64 )
+initial_scale = 1.0
+
+[node name="Levels" type="Node2D" parent="."]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Node2D" parent="Levels" instance=ExtResource( 4 )]
+position = Vector2( 2048, 0 )
+
+[node name="Node2D2" parent="Levels" instance=ExtResource( 5 )]
